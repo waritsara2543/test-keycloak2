@@ -1,5 +1,5 @@
 "use client";
-import { deleteCookie, getCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import {
   createContext,
@@ -104,11 +104,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = useCallback(() => {
-    deleteCookie("access_token");
-
     console.log("logout");
     const idToken = getCookie("id_token");
-
+    document.cookie =
+      "access_token=; domain=.fforward.finance; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+    document.cookie =
+      "refresh_token=; domain=.fforward.finance; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+    document.cookie =
+      "id_token=; domain=.fforward.finance; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
     setUser(null);
     setAuth(false);
     const endSessionEndPoint = new URL(
