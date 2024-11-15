@@ -89,8 +89,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const data = await res.json();
         const accessToken = data.access_token;
         const idToken = data.id_token;
-        setCookie("access_token", accessToken);
-        setCookie("id_token", idToken);
+        const refreshToken = data.refresh_token;
+        setCookie("access_token", accessToken, {
+          domain: ".vercel.app", // Ensure this is set so the cookie is available on subdomains
+          path: "/", // Make the cookie available throughout the site
+          maxAge: 60 * 60 * 24, // Set expiration time (in seconds)
+          secure: process.env.NODE_ENV === "production", // Use secure flag in production
+        });
+        setCookie("refresh_token", refreshToken, {
+          domain: ".vercel.app",
+          path: "/",
+          maxAge: 60 * 60 * 24,
+          secure: process.env.NODE_ENV === "production",
+        });
+        setCookie("id_token", idToken, {
+          domain: ".vercel.app",
+          path: "/",
+          maxAge: 60 * 60 * 24,
+          secure: process.env.NODE_ENV === "production",
+        });
         setToken(accessToken);
         // getUserInfo(accessToken);
       } else {
