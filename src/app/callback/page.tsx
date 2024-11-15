@@ -1,6 +1,5 @@
 "use client";
 import { useEffect } from "react";
-import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 
 const Callback = () => {
