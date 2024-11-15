@@ -13,7 +13,7 @@ export default function Home() {
           <div>{user?.name}</div>
           <div>{user?.email}</div>
           <Link href={`${process.env.NEXT_PUBLIC_DOMAIN_TWO}`}>
-            <a className="mt-5 text-blue-600">Go to another domain</a>
+            <p className="mt-5 text-blue-600">Go to another domain</p>
           </Link>
           <button
             className="mt-5 bg-red-600 text-white px-6 py-2"
