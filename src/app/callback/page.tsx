@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { getCookie } from "cookies-next";
 
 const Callback = () => {
   const router = useRouter();
@@ -38,9 +39,9 @@ const Callback = () => {
           const idToken = data.id_token;
 
           // Store tokens in cookies
-          document.cookie = `access_token=${accessToken}; domain=..fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
-          document.cookie = `refresh_token=${refreshToken}; domain=..fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
-          document.cookie = `id_token=${idToken}; domain=..fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
+          document.cookie = `access_token=${accessToken}; domain=.fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
+          document.cookie = `refresh_token=${refreshToken}; domain=.fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
+          document.cookie = `id_token=${idToken}; domain=.fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
 
           // Redirect to the main page or dashboard after successful login
           router.push("/keycloak");
@@ -54,8 +55,12 @@ const Callback = () => {
         // router.push("/login");
       }
     };
-
-    handleAuthCallback();
+    const token = getCookie("access_token") as string | undefined;
+    if (!token) {
+      handleAuthCallback();
+    } else {
+      router.push("/keycloak");
+    }
   }, [router]);
 
   return <div>Processing login, please wait...</div>;
