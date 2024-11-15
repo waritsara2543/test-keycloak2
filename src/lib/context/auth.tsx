@@ -12,7 +12,7 @@ import {
 interface IAuth {
   isAuthenticated: boolean;
   token: string | null;
-  user: Record<string, any> | null;
+  user: Record<string, string> | null;
   logout: () => void;
 }
 
@@ -26,34 +26,34 @@ const init: IAuth = {
 const AuthContext = createContext(init);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<Record<string, any> | null>(null);
+  const [user, setUser] = useState<Record<string, string> | null>(null);
   const [isAuthenticated, setAuth] = useState<boolean>(false);
   const [token, setToken] = useState<string | null>(null);
   const router = useRouter();
 
-  const getUserInfo = async (accessToken: string) => {
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_KEYCLOAK_URL}/realms/${process.env.NEXT_PUBLIC_KEYCLOAK_REALM}/protocol/openid-connect/userinfo`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data);
-        setAuth(true);
-      } else {
-        console.error("Failed to fetch user info");
-        // login(); // Redirect to login if token is invalid
-      }
-    } catch (error) {
-      console.error("Error fetching user info:", error);
-    }
-  };
+  // const getUserInfo = async (accessToken: string) => {
+  //   try {
+  //     const res = await fetch(
+  //       `${process.env.NEXT_PUBLIC_KEYCLOAK_URL}/realms/${process.env.NEXT_PUBLIC_KEYCLOAK_REALM}/protocol/openid-connect/userinfo`,
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //       }
+  //     );
+  //     if (res.ok) {
+  //       const data = await res.json();
+  //       setUser(data);
+  //       setAuth(true);
+  //     } else {
+  //       console.error("Failed to fetch user info");
+  //       // login(); // Redirect to login if token is invalid
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching user info:", error);
+  //   }
+  // };
 
   const login = () => {
     const clientId = process.env.NEXT_PUBLIC_KEYCLOAK_ID;
@@ -126,7 +126,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       params as Record<string, string>
     );
 
-    let url = `${endSessionEndPoint.href}?${endSessionParams.toString()}`;
+    const url = `${endSessionEndPoint.href}?${endSessionParams.toString()}`;
 
     window.location.href = url;
   }, []);

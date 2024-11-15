@@ -57,7 +57,7 @@ const Callback = () => {
     };
 
     handleAuthCallback();
-  }, []);
+  }, [router]);
 
   return <div>Processing login, please wait...</div>;
 };
