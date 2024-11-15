@@ -158,7 +158,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     // Initial check with a small delay
-    setTimeout(checkCookie, 100);
+    setTimeout(checkCookie, 300);
 
     const intervalId = setInterval(checkCookie, 5000);
 
