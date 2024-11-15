@@ -38,9 +38,9 @@ const Callback = () => {
           const idToken = data.id_token;
 
           // Store tokens in cookies
-          document.cookie = `access_token=${accessToken}; domain=.vercel.app; path=/; max-age=604800; SameSite=None; Secure`;
-          document.cookie = `refresh_token=${refreshToken}; domain=.vercel.app; path=/; max-age=604800; SameSite=None; Secure`;
-          document.cookie = `id_token=${idToken}; domain=.vercel.app; path=/; max-age=604800; SameSite=None; Secure`;
+          document.cookie = `access_token=${accessToken}; domain=..fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
+          document.cookie = `refresh_token=${refreshToken}; domain=..fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
+          document.cookie = `id_token=${idToken}; domain=..fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
 
           // Redirect to the main page or dashboard after successful login
           router.push("/keycloak");

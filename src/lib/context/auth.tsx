@@ -90,9 +90,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const accessToken = data.access_token;
         const idToken = data.id_token;
         const refreshToken = data.refresh_token;
-        document.cookie = `access_token=${accessToken}; domain=.vercel.app; path=/; max-age=604800; SameSite=None; Secure`;
-        document.cookie = `refresh_token=${refreshToken}; domain=.vercel.app; path=/; max-age=604800; SameSite=None; Secure`;
-        document.cookie = `id_token=${idToken}; domain=.vercel.app; path=/; max-age=604800; SameSite=None; Secure`;
+        document.cookie = `access_token=${accessToken}; domain=..fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
+        document.cookie = `refresh_token=${refreshToken}; domain=..fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
+        document.cookie = `id_token=${idToken}; domain=..fforward.finance; path=/; max-age=604800; SameSite=None; Secure`;
         setToken(accessToken);
         // getUserInfo(accessToken);
       } else {
